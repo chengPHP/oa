@@ -181,6 +181,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         //active
         HieuLe\Active\ActiveServiceProvider::class,
+        //permission
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
