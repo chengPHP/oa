@@ -108,6 +108,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $info = Admin::where("id",$id)->first();
+//        dd($info);
 //        dd($info->roles->pluck('name')->all());
         return view('admin.manager.edit',compact('info'));
     }

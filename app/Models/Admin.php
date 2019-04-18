@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-//use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
 
 class Admin extends Authenticatable
 {
     use Notifiable;
-//    use HasRoles;
+    use HasRoles;
     protected $guard_name = 'web';
 
     /**

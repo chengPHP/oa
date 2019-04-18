@@ -3,7 +3,7 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>个人博客后台</h2>
+            <h2>仓库管理系统后台</h2>
 {{--            {!! Breadcrumbs::render('category'); !!}--}}
         </div>
     </div>

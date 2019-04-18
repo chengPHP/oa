@@ -148,7 +148,7 @@
         uploader.on( 'uploadSuccess', function( file, response ) {
             // $( '#'+file.id ).addClass('upload-state-done');
             var img_path = response.ids.path;
-            $('#thumb_img').attr('src',"http://laravel_shop.me/"+img_path);
+            $('#thumb_img').attr('src',"http://oa.me/"+img_path);
             var id = response.ids.id;
             // $('#uploader-demo').append('<input type="hidden" name="file_id" value="'+id+'">');
             $('#uploader-demo').append('<input type="hidden" name="head_portrait" value="'+img_path+'">');
