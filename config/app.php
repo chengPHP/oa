@@ -179,6 +179,8 @@ return [
 
         //debugbar
         Barryvdh\Debugbar\ServiceProvider::class,
+        //active
+        HieuLe\Active\ActiveServiceProvider::class,
 
     ],
 
@@ -231,6 +233,8 @@ return [
 
         //debugbar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        //active
+        'Active' => HieuLe\Active\Facades\Active::class,
 
     ],
 

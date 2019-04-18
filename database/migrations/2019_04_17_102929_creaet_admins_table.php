@@ -20,6 +20,7 @@ class CreaetAdminsTable extends Migration
             $table->string('phone')->unique();
             $table->string('password');
             $table->string('head_portrait')->nullable()->comment('用户头像');
+            $table->tinyInteger('status')->default(1)->comment('状态 -1|软删除 0|禁用 1|启用 ');
             $table->rememberToken();
             $table->timestamps();
         });
