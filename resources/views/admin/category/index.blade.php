@@ -33,6 +33,7 @@
                                     <th><input class="icheck_input_all" type="checkbox" ></th>
                                     <th>id</th>
                                     <th>状态</th>
+                                    <th>类别编号</th>
                                     <th>类别名称</th>
                                     <th>父级名称</th>
                                     <th>设置</th>
@@ -50,6 +51,7 @@
                                                 启用
                                             @endif
                                         </td>
+                                        <td>{{$v['category_code']}}</td>
                                         <td>{{$v['name']}}</td>
                                         <td>{{$v['pid']}}</td>
                                         <td>

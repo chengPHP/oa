@@ -39,11 +39,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function ($router)
     //权限管理
     Route::resource('permission','PermissionController');
     //前台用户管理
-    Route::resource('user','UserController');
-    //商品类别管理
+//    Route::resource('user','UserController');
+    //资产类别管理
     Route::resource('category','CategoryController');
     //商品管理
-    Route::resource('product','ProductController');
+//    Route::resource('product','ProductController');
 });
 
 //文件管理模块路由开始

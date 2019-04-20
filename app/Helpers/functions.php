@@ -145,7 +145,8 @@ if (!function_exists('get_rand_str')) {
  * */
 if (!function_exists('permission_select')) {
 //    function permission_select($id = 0,$selected = [], $type = 0)
-    function permission_select($selected = [], $type = 0)
+    function permission_select($id = 0,$pid = 0, $type = 0)
+//    function permission_select($selected = [], $type = 0)
     {
         $list = Spatie\Permission\Models\Permission::getSpaceTreeData();
         if ($type == 1) {
@@ -157,9 +158,9 @@ if (!function_exists('permission_select')) {
         if ($list) {
             foreach ($list as $key => $val) {
                 $str .= '<option value="' . $val['id'] . '" '
-//                    . ($id == $val['id'] ? 'disabled' : '')
+                    . ($id == $val['id'] ? 'disabled' : '')
 //                    . ($selected == $val['id'] ? 'selected="selected"' : '') . '>'
-                    . (in_array($val['id'],$selected) ? 'selected="selected"' : '') . '>'
+                    . ($val['id']==$pid ? 'selected="selected"' : '') . '>'
                     . $val['space'] . $val['display_name'] .'('. $val['name'] .')'. '</option>';
             }
         }
@@ -253,26 +254,31 @@ if(!function_exists("no_permission")){
  * 商品类别select选择框
  */
 if(!function_exists('category_select')){
-    function category_select($selected = '', $type = 1)
+//    function category_select($selected = '', $type = 1)
+    function category_select($id = 0,$pid = 0, $type = 0)
     {
-        $list = App\Models\Category::where(['status'=>1])->get();
+//        $list = App\Models\Category::where(['status'=>1])->get();
+
+        $list = App\Models\Category::getSpaceTreeData();
 
         if ($type == 1) {
-            $str = '<option value="">请选择商品类别</option>';
+            $str = '<option value="">请选择资产类别</option>';
         } else {
-            $str = '';
+            $str = '<option value="">顶级类别</option>';
         }
         if ($list) {
             foreach ($list as $key => $val) {
 
                 if ($type) {
                     $str .= '<option value="' . $val['id'] . '" '
-                        . ($selected == $val['id'] ? 'selected="selected"' : '') . '>'
+                        . ($id == $val['id'] ? 'selected="selected"' : '') . '>'
                         . $val['display_name'] . $val['name'] . '</option>';
                 } else {
                     $str .= '<option value="' . $val['id'] . '" '
-                        . (in_array($val['id'], (array)$selected) ? 'selected="selected"' : '') . '>'
-                        . $val['display_name'] . $val['name'] . '</option>';
+                        . ($id == $val['id'] ? 'disabled' : '')
+//                    . ($selected == $val['id'] ? 'selected="selected"' : '') . '>'
+                        . ($val['id']==$pid ? 'selected="selected"' : '') . '>'
+                        .  $val['name'] . '</option>';
                 }
             }
         }

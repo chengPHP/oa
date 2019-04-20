@@ -17,6 +17,12 @@
 
         {{csrf_field()}}
         <div class="form-group">
+            <label for="category_code" class="col-sm-2 control-label">类别编号</label>
+            <div class="col-sm-10">
+                <input id="category_code" type="text" name="category_code" value="" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="name" class="col-sm-2 control-label">类别名称</label>
             <div class="col-sm-10">
                 <input id="name" type="text" name="name" value="" class="form-control">

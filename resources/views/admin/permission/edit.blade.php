@@ -17,7 +17,7 @@
             <label for="pid" class="col-sm-2 control-label">父级名称</label>
             <div class="col-sm-10">
                 <select id="pid" class="form-control m-b select2" name="pid">
-                    {!! permission_select($info->id,$info->pid,1) !!}
+                    {!! permission_select($info->id,$info->pid,0) !!}
                 </select>
             </div>
         </div>

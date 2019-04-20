@@ -1,11 +1,17 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title">修改用户信息</h4>
+    <h4 class="modal-title">修改类别信息</h4>
 </div>
-<form method="post" class="form-horizontal" action="{{url('admin/article')}}/{{$info->id}}">
+<form method="post" class="form-horizontal" action="{{url('admin/category')}}/{{$info->id}}">
     <div class="modal-body">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="_method" value="PUT">
+        <div class="form-group">
+            <label for="category_code" class="col-sm-2 control-label">类别编号</label>
+            <div class="col-sm-10">
+                <input id="category_code" type="text" name="category_code" value="{{$info->category_code}}" class="form-control">
+            </div>
+        </div>
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">类别名称</label>
             <div class="col-sm-10">
@@ -17,10 +23,11 @@
             <label for="pid" class="col-sm-2 control-label">父级名称</label>
             <div class="col-sm-10">
                 <select id="pid" class="form-control m-b select2" name="pid">
-                    <option value="0">请选择</option>
+                    {{--<option value="0">请选择</option>
                     @foreach($list as $v)
                         <option value="{{$v['id']}}" {{$info->pid == $v['id'] ? 'selected' : ''}} {{$info->id==$v['id'? 'disabled' : '']}} >{{$v['name']}}</option>
-                    @endforeach
+                    @endforeach--}}
+                    {!! category_select($info->id,$info->pid,0) !!}
                 </select>
             </div>
         </div>
