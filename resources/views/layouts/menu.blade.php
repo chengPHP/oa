@@ -13,13 +13,16 @@
 <li class="{{ active_class(if_uri_pattern('admin/permission*')) }}">
     <a href="{{url('admin/permission')}}"><i class="fa fa-desktop"></i> <span class="nav-label">权限管理</span></a>
 </li>
+<li class="{{ active_class(if_uri_pattern('admin/department*')) }}">
+    <a href="{{url('admin/department')}}"><i class="fa fa-users"></i> <span class="nav-label">部门管理</span></a>
+</li>
 <li class="{{ active_class(if_uri_pattern('admin/category*')) }}">
     <a href="{{url('admin/category')}}"><i class="fa fa-users"></i> <span class="nav-label">资产类别管理</span></a>
 </li>
-{{--<li class="{{ active_class(if_uri_pattern('admin/category*')) }}">
-    <a href="{{url('admin/category')}}"><i class="fa fa-users"></i> <span class="nav-label">商品类别管理</span></a>
+<li class="{{ active_class(if_uri_pattern('admin/asset*')) }}">
+    <a href="{{url('admin/asset')}}"><i class="fa fa-users"></i> <span class="nav-label">资产管理</span></a>
 </li>
-<li class="{{ active_class(if_uri_pattern('admin/product*')) }}">
+{{--<li class="{{ active_class(if_uri_pattern('admin/product*')) }}">
     <a href="{{url('admin/product')}}"><i class="fa fa-users"></i> <span class="nav-label">商品管理</span></a>
 </li>--}}
 {{--

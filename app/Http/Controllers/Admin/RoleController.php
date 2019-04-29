@@ -25,6 +25,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+
         $map = [];
         $search = '';
         if($request->search){

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoryRequest;
-use App\Models\Asset;
-use App\Models\Category;
+use App\Http\Requests\DepartmentRequest;
+use App\Models\Admin;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,9 +27,6 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        /*if(no_permission('Category')){
-            return view(config('program.no_permission_to_view'));
-        }*/
         if($request->search){
             $search = $request->search;
             $map = [
@@ -42,8 +39,8 @@ class CategoryController extends Controller
                 ['status', '>=', 0]
             ];
         }
-        $list = Category::where($map)->paginate(config("program.PAGE_SIZE"));
-        return view('admin.category.index',compact('list','search'));
+        $list = Department::where($map)->paginate(config("program.PAGE_SIZE"));
+        return view('admin.department.index',compact('list','search'));
     }
 
     /**
@@ -56,8 +53,8 @@ class CategoryController extends Controller
         /*if(no_permission('createCategory')){
             return view(config('program.no_permission_to_view'));
         }*/
-        $list = Category::get();
-        return view('admin.category.add',compact('list'));
+        $list = Department::get();
+        return view('admin.department.add',compact('list'));
     }
 
     /**
@@ -66,32 +63,31 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(DepartmentRequest $request)
     {
         /*if(no_permission('createCategory')){
             return view(config('program.no_permission_to_view'));
         }*/
-        $category = new Category();
-        $category->category_code = $request->category_code;
-        $category->name = $request->name;
-        $category->pid = $request->pid;
+        $department = new Department();
+        $department->name = $request->name;
+        $department->pid = $request->pid;
         if($request->pid==0){
-            $category->path = '0,';
+            $department->path = '0,';
         }else{
-            $path = Category::where("id",$request->pid)->value('path');
-            $category->path = $path.','.$request->pid;
+            $path = Department::where("id",$request->pid)->value('path');
+            $department->path = $path.','.$request->pid;
         }
-        $category->status = $request->status;
-        $info = $category->save();
+        $department->status = $request->status;
+        $info = $department->save();
         if($info){
             $message = [
                 'code' => 1,
-                'message' => '类别添加成功'
+                'message' => '部门添加成功'
             ];
         }else{
             $message = [
                 'code' => 0,
-                'message' => '类别添加失败'
+                'message' => '部门添加失败'
             ];
         }
         return response()->json($message);
@@ -121,8 +117,8 @@ class CategoryController extends Controller
         /*if(no_permission('editCategory')){
             return view(config('program.no_permission_to_view'));
         }*/
-        $info = Category::find($id);
-        return view("admin.category.edit",compact('info'));
+        $info = Department::find($id);
+        return view("admin.department.edit",compact('info'));
     }
 
     /**
@@ -132,33 +128,32 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(DepartmentRequest $request, $id)
     {
         /*if(no_permission('editCategory')){
             return view(config('program.no_permission_to_view'));
         }*/
         $arr = [
-            'category_code' => $request->category_code,
             'name' => $request->name,
             'pid' => $request->pid
         ];
         if($request->pid==0){
             $arr['path'] = '0,';
         }else{
-            $path = Category::where("id",$request->pid)->value('path');
+            $path = Department::where("id",$request->pid)->value('path');
             $arr['path'] = $path.','.$request->pid;
         }
         $arr['status'] = $request->status;
-        $info = Category::where('id',$id)->update($arr);
+        $info = Department::where('id',$id)->update($arr);
         if($info){
             $message = [
                 'code' => 1,
-                'message' => '类别信息修改成功'
+                'message' => '部门信息修改成功'
             ];
         }else{
             $message = [
                 'code' => 0,
-                'message' => '类别信息修改失败，请稍后重试'
+                'message' => '部门信息修改失败，请稍后重试'
             ];
         }
         return response()->json($message);
@@ -179,24 +174,24 @@ class CategoryController extends Controller
         $idArr = explode(",",$id);
         $message = [];
         foreach ($idArr as $v){
-            $info = Category::where('pid',$v)->first();
+            $info = Department::where('pid',$v)->first();
             if($info){
                 $message = [
                     'code' => 0,
-                    'message' => '此类别下面还有子类别，不能删除'
+                    'message' => '此部门下面还有子类别，不能删除'
                 ];
             }else{
-                if(Asset::where('category_id',$v)->first()){
+                if(Admin::where('department_id',$v)->first()){
                     $message = [
                         'code' => 0,
-                        'message' => '此类别下面还有资产，不能删除'
+                        'message' => '此类别下面还有公司员工，不能删除'
                     ];
                 }else{
-                    $info1 = Category::where('id',$v)->update(['status'=>-1]);
+                    $info1 = Department::where('id',$v)->update(['status'=>-1]);
                     if($info1){
                         $message = [
                             'code' => 1,
-                            'message' => '类别信息删除成功'
+                            'message' => '部门信息删除成功'
                         ];
                     }
                 }

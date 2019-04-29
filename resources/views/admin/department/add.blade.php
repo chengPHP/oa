@@ -1,8 +1,8 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title">添加类别</h4>
+    <h4 class="modal-title">添加部门</h4>
 </div>
-<form id="signupForm" method="post" class="form-horizontal" action="{{url('admin/category')}}" enctype="multipart/form-data">
+<form id="signupForm" method="post" class="form-horizontal" action="{{url('admin/department')}}" enctype="multipart/form-data">
     <div class="modal-body">
         {{--错误信息提示--}}
         @if (count($errors) > 0)
@@ -17,13 +17,7 @@
 
         {{csrf_field()}}
         <div class="form-group">
-            <label for="category_code" class="col-sm-2 control-label">类别编号</label>
-            <div class="col-sm-10">
-                <input id="category_code" type="text" name="category_code" value="" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">类别名称</label>
+            <label for="name" class="col-sm-2 control-label">部门名称</label>
             <div class="col-sm-10">
                 <input id="name" type="text" name="name" value="" class="form-control">
             </div>
@@ -33,11 +27,7 @@
             <label for="pid" class="col-sm-2 control-label">父级类别</label>
             <div class="col-sm-10">
                 <select id="pid" class="form-control m-b select2" name="pid">
-                    {{--<option value="0">请选择</option>
-                    @foreach($list as $v)
-                        <option value="{{$v['id']}}">{{$v['name']}}</option>
-                    @endforeach--}}
-                    {!! category_select() !!}
+                    {!! department_select() !!}
                 </select>
             </div>
         </div>
@@ -77,7 +67,7 @@
     function tijiao(obj) {
         $.ajax({
             type: "post",
-            url: "{{url('admin/category')}}",
+            url: "{{url('admin/department')}}",
             data: $('.form-horizontal').serialize(),
             dataType:"json",
             beforeSend:function () {

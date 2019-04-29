@@ -247,9 +247,9 @@
                             <i class="fa fa-sign-out"></i>
                                 退出
 
-                            {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                {{--{{ csrf_field() }}--}}
-                            {{--</form>--}}
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </a>
                     </li>
                 </ul>

@@ -195,7 +195,7 @@ if(!function_exists("role_select")){
         $list = Spatie\Permission\Models\Role::where(['status'=>1])->get();
 
         if ($type == 1) {
-            $str = '<option value="">请选择角色</option>';
+            $str = '<option value="0">请选择角色</option>';
         } else {
             $str = '';
         }
@@ -251,7 +251,7 @@ if(!function_exists("no_permission")){
 }
 
 /*
- * 商品类别select选择框
+ * 物资类别select选择框
  */
 if(!function_exists('category_select')){
 //    function category_select($selected = '', $type = 1)
@@ -262,9 +262,45 @@ if(!function_exists('category_select')){
         $list = App\Models\Category::getSpaceTreeData();
 
         if ($type == 1) {
-            $str = '<option value="">请选择资产类别</option>';
+            $str = '<option value="" disabled>请选择资产类别</option>';
         } else {
-            $str = '<option value="">顶级类别</option>';
+            $str = '<option value="0">顶级类别</option>';
+        }
+        if ($list) {
+            foreach ($list as $key => $val) {
+
+                if ($type) {
+                    $str .= '<option value="' . $val['id'] . '" '
+                        . ($id == $val['id'] ? 'selected="selected"' : '') . '>'
+                        . $val['display_name'] . $val['name'] . '</option>';
+                } else {
+                    $str .= '<option value="' . $val['id'] . '" '
+                        . ($id == $val['id'] ? 'disabled' : '')
+//                    . ($selected == $val['id'] ? 'selected="selected"' : '') . '>'
+                        . ($val['id']==$pid ? 'selected="selected"' : '') . '>'
+                        .  $val['name'] . '</option>';
+                }
+            }
+        }
+        return $str;
+    }
+}
+
+
+/*
+ * 部门select选择框
+ */
+if(!function_exists('department_select')){
+//    function department_select($selected = '', $type = 1)
+    function department_select($id = 0,$pid = 0, $type = 0)
+    {
+
+        $list = App\Models\Department::getSpaceTreeData();
+
+        if ($type == 1) {
+            $str = '<option value="" disabled>请选择部门</option>';
+        } else {
+            $str = '<option value="0">顶级</option>';
         }
         if ($list) {
             foreach ($list as $key => $val) {
